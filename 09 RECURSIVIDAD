@@ -1,0 +1,132 @@
+# Ejercicio 1: Creamos la función recursiva para el factorial
+def factorial(n):
+    # Caso base: si n es 0 o 1, devolvemos 1 para frenar
+    if n == 0 or n == 1:
+        return 1
+    # Paso recursivo: n multiplicado por el factorial del anterior
+    else:
+        return n * factorial(n - 1)
+
+# Le pedimos el número al usuario
+numero_usuario = int(input("Ingresá un número entero positivo: "))
+
+print(f"Calculando los factoriales del 1 al {numero_usuario}:")
+
+# Usamos un bucle común (for) para recorrer desde 1 hasta el número del usuario
+for i in range(1, numero_usuario + 1):
+    resultado = factorial(i)  # Llamamos a nuestra función recursiva
+    print(f"El factorial de {i} es: {resultado}")
+
+# Ejercicio 2: Creamos la función recursiva para calcular Fibonacci en una posición
+def fibonacci(n):
+    # Casos base: si es la posición 0 o 1, devuelve ese mismo número
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    # Paso recursivo: suma las dos posiciones anteriores
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+# Le pedimos la posición al usuario
+posicion_usuario = int(input("Ingresá la posición hasta donde querés ver la serie de Fibonacci: "))
+
+print(f"Mostrando la serie completa hasta la posición {posicion_usuario}:")
+
+# Usamos un bucle for para ir calculando y mostrando desde 0 hasta la posición elegida
+for i in range(posicion_usuario + 1):
+    resultado = fibonacci(i)
+    print(f"Posición {i}: {resultado}")
+
+# Ejercicio 3: Creamos la función recursiva para la potencia
+def potencia(n, m):
+    # Caso base: todo número elevado a la 0 es 1 (frena la recursión)
+    if m == 0:
+        return 1
+    # Paso recursivo: usando la fórmula que pide el ejercicio
+    else:
+        return n * potencia(n, m - 1)
+
+# Le pedimos los datos al usuario
+base = int(input("Ingresá el número base: "))
+exponente = int(input("Ingresá el exponente (positivo): "))
+
+# Llamamos a la función y guardamos el resultado
+resultado = potencia(base, exponente)
+
+print(f"El número {base} elevado a la {exponente} es: {resultado}")
+
+# Ejercicio 4: Creamos la función recursiva para pasar a binario
+def decimal_a_binario(n):
+    # Caso base: si el número es menor a 2 (0 o 1), lo devolvemos como texto
+    if n < 2:
+        return str(n)
+    else:
+        # Paso recursivo: dividimos por 2 y le sumamos el resto al final
+        return decimal_a_binario(n // 2) + str(n % 2)
+
+# Le pedimos el número al usuario
+numero = int(input("Ingresá un número entero positivo para pasarlo a binario: "))
+
+# Llamamos a la función y mostramos el resultado
+resultado = decimal_a_binario(numero)
+print(f"El número {numero} en binario es: {resultado}")
+
+# Ejercicio 5: Creamos la función recursiva para verificar el palíndromo
+def es_palindromo(palabra):
+    # Caso base 1: si la palabra se queda sin letras o tiene una sola, es palíndromo
+    if len(palabra) <= 1:
+        return True
+    
+    # Caso base 2: si la primera y la última letra son distintas, NO es palíndromo
+    if palabra[0] != palabra[-1]:
+        return False
+    
+    # Paso recursivo: llamamos a la función recortando los extremos (sin la 1era y última letra)
+    return es_palindromo(palabra[1:-1])
+
+# Le pedimos una palabra al usuario
+texto = input("Ingresá una palabra (sin espacios ni tildes): ").lower()
+
+# Probamos la función
+resultado = es_palindromo(texto)
+
+if resultado:
+    print("¡Sí, es un palíndromo!")
+else:
+    print("No, no es un palíndromo.")
+
+# Ejercicio 6: Creamos la función recursiva para sumar los dígitos
+def suma_digitos(n):
+    # Caso base: si el número tiene un solo dígito, lo devolvemos
+    if n < 10:
+        return n
+    else:
+        # Paso recursivo: sumamos el último dígito (n % 10) 
+        # y llamamos a la función con el número sin su último dígito (n // 10)
+        return (n % 10) + suma_digitos(n // 10)
+
+# Ejercicio 7: Creamos la función recursiva para contar los bloques
+def contar_bloques(n):
+    # Caso base: en el nivel superior (el último) hay 1 solo bloque
+    if n == 1:
+        return 1
+    else:
+        # Paso recursivo: sumamos los bloques del nivel actual (n) 
+        # más los bloques de los niveles superiores
+        return n + contar_bloques(n - 1)
+
+# Ejercicio 8: Creamos la función recursiva para contar un dígito específico
+def contar_digito(numero, digito):
+    # Caso base: si el número es 0, ya terminamos de recorrerlo
+    if numero == 0:
+        return 0
+    
+    # Obtenemos el último dígito del número
+    ultimo_digito = numero % 10
+    
+    # Verificamos si el último dígito coincide con el que buscamos (suma 1 si coincide, 0 si no)
+    coincidencia = 1 if ultimo_digito == digito else 0
+    
+    # Paso recursivo: sumamos la coincidencia y pasamos al siguiente dígito achicando el número
+    return coincidencia + contar_digito(numero // 10, digito)
